@@ -60,6 +60,91 @@ body {
 }
 .count-up { animation: count-up 0.8s ease-out forwards; }
 
+/* ============ BIL-ANIMATIONER ============ */
+
+/* Bilen rullar in från höger när sidan laddar */
+@keyframes car-roll-in {
+  from {
+    opacity: 0;
+    transform: translateX(120%);
+  }
+  60% {
+    opacity: 1;
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.car-roll-in {
+  animation: car-roll-in 2.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Hjul roterar konstant (mycket långsamt) */
+@keyframes wheel-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.car-roll-in .wheel-spokes {
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: wheel-spin 8s linear infinite;
+}
+
+/* Vid scroll roterar hjulen snabbare (via CSS variable från JS) */
+.car-scrolling .wheel-spokes {
+  animation-duration: 1.5s;
+}
+
+/* Parallax på bilen vid scroll — JS sätter --parallax i px */
+.car-parallax {
+  transform: translate3d(0, var(--parallax, 0px), 0);
+  will-change: transform;
+}
+
+/* Reveal-animation för sektioner — kräver html.js för att sätta initial state.
+   Utan JS: allt synligt direkt (graceful fallback, ingen FOUC). */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+html.js .reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger för listobjekt */
+html.js .reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+html.js .reveal-stagger.is-visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+html.js .reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0.05s; }
+html.js .reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 0.12s; }
+html.js .reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 0.19s; }
+html.js .reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 0.26s; }
+html.js .reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 0.33s; }
+html.js .reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 0.40s; }
+
+/* Respektera prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .car-roll-in,
+  .car-roll-in .wheel-spokes,
+  .reveal,
+  .reveal-stagger > * {
+    animation: none;
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Sätt theme baserat på system om ingen explicit preference */
 @media (prefers-color-scheme: light) {
   :root:not([data-theme]) {
