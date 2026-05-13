@@ -141,67 +141,132 @@ const { variant, class: className = "" } = Astro.props;
 )}
 
 {variant === "car-detailed" && (
-  <svg viewBox="0 0 600 220" xmlns="http://www.w3.org/2000/svg" class:list={["w-full", className]} aria-label="Sedan-bil från sidan">
-    <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      {/* Underrede och chassi */}
-      <path d="M 30 170 L 70 170 M 130 170 L 350 170 M 410 170 L 540 170" />
-      {/* Front bumper + grill */}
-      <path d="M 30 170 L 30 145 Q 30 138 38 138 L 70 138" />
-      <line x1="38" y1="155" x2="60" y2="155" stroke-width="1.5" opacity="0.6" />
-      <line x1="38" y1="160" x2="60" y2="160" stroke-width="1.5" opacity="0.6" />
-      {/* Strålkastare framtill */}
-      <path d="M 30 142 L 50 142" stroke-width="3" />
-      <circle cx="40" cy="148" r="3" fill="currentColor" opacity="0.4" />
-      {/* Motorhuv */}
-      <path d="M 70 138 L 100 122 Q 140 110 200 105" />
-      {/* Vindruta */}
-      <path d="M 200 105 Q 250 100 295 105 L 320 138" />
-      {/* Tak */}
-      <path d="M 200 105 L 200 95 Q 200 88 210 88 L 380 88 Q 395 88 400 95 L 410 105" />
-      <path d="M 295 105 L 410 105" />
-      {/* Bakruta */}
-      <path d="M 410 105 L 440 138" />
-      {/* Bagagelucka och bak */}
-      <path d="M 440 138 L 540 138 Q 548 138 548 145 L 548 170" />
-      {/* Stötfångare bak */}
-      <line x1="540" y1="170" x2="548" y2="170" />
-      {/* Baklampa */}
-      <path d="M 528 142 L 548 142" stroke-width="3" />
-      {/* Dörrhandtag fram */}
-      <line x1="240" y1="120" x2="265" y2="120" stroke-width="1.5" />
-      {/* Dörrhandtag bak */}
-      <line x1="340" y1="120" x2="365" y2="120" stroke-width="1.5" />
-      {/* B-pelare (vertikal mellan dörrarna) */}
-      <line x1="300" y1="105" x2="300" y2="138" stroke-width="1.5" opacity="0.5" />
-      {/* Fönster-detalj */}
-      <line x1="210" y1="98" x2="297" y2="98" stroke-width="1" opacity="0.4" />
-      <line x1="303" y1="98" x2="395" y2="98" stroke-width="1" opacity="0.4" />
-      {/* Karosslinje (säkermärke från huv till bagagelucka) */}
-      <line x1="80" y1="145" x2="540" y2="145" stroke-width="1" opacity="0.3" stroke-dasharray="3 3" />
+  <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg" class:list={["w-full", className]} aria-label="Klassisk sedan från sidan">
+    {/* Skugga under bilen */}
+    <ellipse cx="340" cy="240" rx="290" ry="10" fill="currentColor" opacity="0.15" />
 
-      {/* Hjul fram — yttre + nav (med spin-klass) */}
-      <g class="wheel-front">
-        <circle cx="100" cy="170" r="32" stroke-width="3" />
-        <circle cx="100" cy="170" r="20" stroke-width="2" />
-        <g class="wheel-spokes">
-          <circle cx="100" cy="170" r="4" fill="currentColor" />
-          <line x1="100" y1="150" x2="100" y2="190" stroke-width="2" />
-          <line x1="80" y1="170" x2="120" y2="170" stroke-width="2" />
-          <line x1="86" y1="156" x2="114" y2="184" stroke-width="2" />
-          <line x1="114" y1="156" x2="86" y2="184" stroke-width="2" />
+    {/* Kaross — fylld huvudform med subtil opacitet */}
+    <path
+      d="M 40 195
+         L 40 175
+         Q 40 165 50 162
+         L 70 158
+         Q 80 156 90 145
+         L 130 110
+         Q 145 100 165 95
+         L 240 88
+         Q 280 85 320 86
+         L 410 90
+         Q 460 96 500 122
+         L 540 152
+         Q 555 160 575 162
+         L 615 168
+         Q 635 172 638 184
+         L 638 195
+         Z"
+      fill="currentColor"
+      opacity="0.92"
+    />
+
+    {/* Fönster — vindruta */}
+    <path
+      d="M 165 100
+         Q 170 96 180 95
+         L 295 90
+         L 312 132
+         L 175 132
+         Q 168 132 166 126
+         Z"
+      fill="currentColor"
+      opacity="0.4"
+    />
+    {/* Fönster — bakruta */}
+    <path
+      d="M 312 90
+         L 405 95
+         Q 430 98 450 115
+         L 480 132
+         L 320 132
+         Z"
+      fill="currentColor"
+      opacity="0.4"
+    />
+
+    {/* B-pelare mellan fönstren */}
+    <rect x="307" y="92" width="8" height="42" fill="currentColor" opacity="0.92" />
+
+    {/* Karosslinje (lower belt) */}
+    <line
+      x1="80"
+      y1="165"
+      x2="615"
+      y2="170"
+      stroke="currentColor"
+      stroke-width="1.5"
+      opacity="0.5"
+    />
+
+    {/* Dörrlinjer */}
+    <line x1="180" y1="135" x2="180" y2="190" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
+    <line x1="310" y1="135" x2="310" y2="190" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
+    <line x1="450" y1="135" x2="450" y2="190" stroke="currentColor" stroke-width="1.2" opacity="0.4" />
+
+    {/* Dörrhandtag */}
+    <rect x="230" y="148" width="22" height="4" rx="2" fill="currentColor" opacity="0.55" />
+    <rect x="370" y="148" width="22" height="4" rx="2" fill="currentColor" opacity="0.55" />
+
+    {/* Sidoback-spegel */}
+    <path
+      d="M 158 110 L 152 102 L 160 100 L 165 108 Z"
+      fill="currentColor"
+      opacity="0.92"
+    />
+
+    {/* Framlykta */}
+    <ellipse cx="56" cy="175" rx="14" ry="7" fill="currentColor" opacity="0.5" />
+    <ellipse cx="56" cy="174" rx="9" ry="4" fill="currentColor" opacity="0.85" />
+
+    {/* Grill — vertikala stickor */}
+    <line x1="60" y1="184" x2="60" y2="195" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
+    <line x1="66" y1="184" x2="66" y2="195" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
+    <line x1="72" y1="184" x2="72" y2="195" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
+    <line x1="78" y1="184" x2="78" y2="195" stroke="currentColor" stroke-width="1.5" opacity="0.45" />
+
+    {/* Baklykta */}
+    <rect x="608" y="170" width="24" height="14" rx="2" fill="currentColor" opacity="0.5" />
+    <rect x="612" y="172" width="16" height="10" rx="1" fill="currentColor" opacity="0.85" />
+
+    {/* Avgasrör */}
+    <rect x="618" y="200" width="20" height="6" rx="2" fill="currentColor" opacity="0.45" />
+
+    {/* Hjul fram — med spin-klass */}
+    <g class="wheel-front">
+      <circle cx="160" cy="200" r="42" fill="currentColor" opacity="0.92" />
+      <circle cx="160" cy="200" r="30" fill="currentColor" opacity="0.5" />
+      <circle cx="160" cy="200" r="22" fill="currentColor" opacity="0.92" />
+      <g class="wheel-spokes" style="transform-origin: 160px 200px;">
+        <circle cx="160" cy="200" r="6" fill="currentColor" opacity="0.4" />
+        <rect x="158" y="178" width="4" height="44" fill="currentColor" opacity="0.4" />
+        <rect x="138" y="198" width="44" height="4" fill="currentColor" opacity="0.4" />
+        <g transform="rotate(45 160 200)">
+          <rect x="158" y="178" width="4" height="44" fill="currentColor" opacity="0.4" />
+          <rect x="138" y="198" width="44" height="4" fill="currentColor" opacity="0.4" />
         </g>
       </g>
+    </g>
 
-      {/* Hjul bak */}
-      <g class="wheel-rear">
-        <circle cx="380" cy="170" r="32" stroke-width="3" />
-        <circle cx="380" cy="170" r="20" stroke-width="2" />
-        <g class="wheel-spokes">
-          <circle cx="380" cy="170" r="4" fill="currentColor" />
-          <line x1="380" y1="150" x2="380" y2="190" stroke-width="2" />
-          <line x1="360" y1="170" x2="400" y2="170" stroke-width="2" />
-          <line x1="366" y1="156" x2="394" y2="184" stroke-width="2" />
-          <line x1="394" y1="156" x2="366" y2="184" stroke-width="2" />
+    {/* Hjul bak */}
+    <g class="wheel-rear">
+      <circle cx="510" cy="200" r="42" fill="currentColor" opacity="0.92" />
+      <circle cx="510" cy="200" r="30" fill="currentColor" opacity="0.5" />
+      <circle cx="510" cy="200" r="22" fill="currentColor" opacity="0.92" />
+      <g class="wheel-spokes" style="transform-origin: 510px 200px;">
+        <circle cx="510" cy="200" r="6" fill="currentColor" opacity="0.4" />
+        <rect x="508" y="178" width="4" height="44" fill="currentColor" opacity="0.4" />
+        <rect x="488" y="198" width="44" height="4" fill="currentColor" opacity="0.4" />
+        <g transform="rotate(45 510 200)">
+          <rect x="508" y="178" width="4" height="44" fill="currentColor" opacity="0.4" />
+          <rect x="488" y="198" width="44" height="4" fill="currentColor" opacity="0.4" />
         </g>
       </g>
     </g>
