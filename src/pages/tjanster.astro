@@ -1,0 +1,128 @@
+---
+import Base from "../layouts/Base.astro";
+import Decor from "../components/Decor.astro";
+import { site, services } from "../site.config";
+---
+
+<Base title={`Tjänster och priser – ${site.name}`}>
+  <!-- HERO -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+        / Tjänster &amp; priser
+      </p>
+      <h1 class="font-display text-7xl md:text-[10rem] uppercase text-paper mt-3 leading-[0.85] tracking-tight">
+        Allt vi gör.<br />
+        <span class="text-warn">Med priser.</span>
+      </h1>
+      <p class="text-paper-dim mt-8 max-w-xl leading-relaxed">
+        Priserna nedan är riktpriser för standardarbeten. Större jobb
+        offereras alltid innan vi börjar, så ni vet vad det kommer kosta.
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVICE GRID -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-shop-line">
+        {
+          services.map((s) => (
+            <div class="bg-shop p-8 group hover:bg-shop-soft transition-colors">
+              <div class="flex items-start justify-between mb-8">
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+                  / {s.no}
+                </p>
+                <div class="w-10 h-10 text-warn">
+                  <Decor variant={s.icon} />
+                </div>
+              </div>
+              <h3 class="font-display text-3xl uppercase text-paper tracking-tight leading-none">
+                {s.name}
+              </h3>
+              <p class="text-sm text-paper-dim mt-4 leading-relaxed">
+                {s.short}
+              </p>
+              <div class="mt-8 flex items-baseline justify-between border-t border-shop-line pt-4">
+                <p class="font-mono text-xs uppercase tracking-[0.15em] text-paper-soft">
+                  {s.duration}
+                </p>
+                <p class="font-display text-2xl text-warn tabular-nums">
+                  {s.price}
+                </p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO-BAND -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-20">
+      <div class="grid md:grid-cols-3 gap-px bg-shop-line">
+        <div class="bg-shop p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn">
+            / Betalning
+          </p>
+          <p class="font-display text-3xl uppercase text-paper mt-3 tracking-tight">
+            Faktura eller kort
+          </p>
+          <p class="text-sm text-paper-dim mt-3 leading-relaxed">
+            Swish, kort, eller faktura. 30 dagar netto för företagskunder.
+          </p>
+        </div>
+        <div class="bg-shop p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn">
+            / Hämtning
+          </p>
+          <p class="font-display text-3xl uppercase text-paper mt-3 tracking-tight">
+            Gratis i Sollentuna
+          </p>
+          <p class="text-sm text-paper-dim mt-3 leading-relaxed">
+            Vi hämtar bilen hos er kostnadsfritt inom Sollentuna kommun.
+          </p>
+        </div>
+        <div class="bg-shop p-8">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn">
+            / Garanti
+          </p>
+          <p class="font-display text-3xl uppercase text-paper mt-3 tracking-tight">
+            12 mån på arbete
+          </p>
+          <p class="text-sm text-paper-dim mt-3 leading-relaxed">
+            Tolv månaders garanti på allt arbete. Reservdelar enligt
+            tillverkare.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="border-b border-shop-line bg-warn text-shop">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-24 grid md:grid-cols-12 gap-8 items-end">
+      <div class="md:col-span-8">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] opacity-70">
+          / Nästa steg
+        </p>
+        <h2 class="font-display text-6xl md:text-8xl uppercase mt-3 leading-[0.9] tracking-tight">
+          Boka in bilen.
+        </h2>
+      </div>
+      <div class="md:col-span-4">
+        <p class="leading-relaxed">
+          Fyll i offertförfrågan eller ring oss direkt. Vi återkopplar inom
+          24 timmar.
+        </p>
+        <a
+          href="/offert"
+          class="mt-6 inline-flex items-center justify-between bg-shop text-warn px-6 py-4 font-mono text-xs uppercase tracking-[0.2em] font-semibold hover:bg-shop-deep transition-colors w-full"
+        >
+          Begär offert <span>▸</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

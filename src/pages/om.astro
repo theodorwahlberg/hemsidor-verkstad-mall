@@ -1,0 +1,115 @@
+---
+import Base from "../layouts/Base.astro";
+import Decor from "../components/Decor.astro";
+import { site, team, stats } from "../site.config";
+---
+
+<Base title={`Om oss – ${site.name}`}>
+  <!-- HERO -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+        / Om oss
+      </p>
+      <h1 class="font-display text-7xl md:text-[9rem] uppercase text-paper mt-3 leading-[0.85] tracking-tight">
+        Mikael Holm<br />
+        <span class="text-warn">och teamet.</span>
+      </h1>
+    </div>
+  </section>
+
+  <!-- STORY -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-12">
+      <div class="md:col-span-3">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim sticky top-32">
+          / Historien
+        </p>
+      </div>
+      <div class="md:col-span-9 space-y-6 text-lg text-paper-dim leading-relaxed">
+        <p>
+          Jag startade {site.name} år {site.yearStarted} efter femton år som
+          mekaniker på Volvos auktoriserade verkstad. Idén var enkel: en
+          verkstad där kunden förstår vad som händer med bilen, varför det
+          händer, och vad det kostar innan vi börjar.
+        </p>
+        <p>
+          Idag är vi tre mekaniker som jobbar här på {site.address.street}. Vi
+          tar emot alla bilmärken, från vardagsbruk till veteranbilar, och vi
+          blir aldrig dummare för att du frågar.
+        </p>
+        <p>
+          Behöver något göras som inte stod i offerten får du ett samtal
+          innan, inte en faktura efter. Vi använder originaldelar eller
+          likvärdiga och ger tolv månaders garanti på allt arbete vi gör.
+        </p>
+        <p class="font-display text-3xl md:text-4xl uppercase text-paper mt-12 pl-6 border-l-2 border-warn tracking-tight leading-tight">
+          "En verkstad ska vara som en familjedoktor. Komma med sin bil och få
+          raka svar."
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section class="border-b border-shop-line bg-shop-soft">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
+      <div class="border-b border-shop-line pb-8 mb-12">
+        <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+          / Teamet
+        </p>
+        <h2 class="font-display text-6xl md:text-7xl uppercase text-paper mt-3 leading-none tracking-tight">
+          Tre mekaniker.
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-px bg-shop-line">
+        {
+          team.map((m) => (
+            <div class="bg-shop p-10">
+              <div class="flex items-start justify-between mb-8">
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+                  / {m.no}
+                </p>
+                <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn">
+                  {m.yearsHere}+ år
+                </p>
+              </div>
+              <h3 class="font-display text-4xl uppercase text-paper tracking-tight leading-none">
+                {m.name}
+              </h3>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn mt-3">
+                {m.role}
+              </p>
+              <p class="text-sm text-paper-dim mt-6 leading-relaxed">
+                {m.speciality}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- STAT-BAND -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-20">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-4">
+        {
+          stats.map((stat, i) => (
+            <div class:list={[
+              "relative",
+              i > 0 && "md:pl-8 md:border-l md:border-shop-line",
+            ]}>
+              <p class="font-display text-7xl md:text-8xl text-paper leading-none tabular-nums">
+                {stat.value}<span class="text-warn">{stat.suffix}</span>
+              </p>
+              <p class="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+                {stat.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>

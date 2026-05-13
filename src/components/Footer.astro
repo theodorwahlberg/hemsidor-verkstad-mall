@@ -1,0 +1,89 @@
+---
+import { site } from "../site.config";
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-shop-line bg-shop-deep mt-0">
+  <div class="max-w-7xl mx-auto px-6 py-16 grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-paper-soft">
+        Verkstad / Sollentuna
+      </p>
+      <p class="font-display text-5xl md:text-6xl text-paper mt-3 leading-[0.95] tracking-tight">
+        {site.name}
+      </p>
+      <p class="text-sm text-paper-dim mt-5 max-w-sm leading-relaxed">
+        {site.tagline}
+      </p>
+    </div>
+
+    <div class="md:col-span-3">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-paper-soft">
+        Hitta hit
+      </p>
+      <p class="text-paper mt-4 leading-relaxed text-sm">
+        {site.address.street}<br />
+        {site.address.postal}
+      </p>
+      <a
+        href={site.address.mapsUrl}
+        target="_blank"
+        rel="noopener"
+        class="inline-block mt-3 font-mono text-xs uppercase tracking-[0.15em] text-warn hover:underline underline-offset-4"
+      >
+        Karta ↗
+      </a>
+    </div>
+
+    <div class="md:col-span-2">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-paper-soft">
+        Kontakt
+      </p>
+      <a
+        href={`tel:${site.phone.replace(/\s/g, "")}`}
+        class="block mt-4 text-paper hover:text-warn text-sm"
+      >
+        {site.phone}
+      </a>
+      <a
+        href={`mailto:${site.email}`}
+        class="block mt-1 text-paper-dim hover:text-warn text-sm break-all"
+      >
+        {site.email}
+      </a>
+    </div>
+
+    <div class="md:col-span-2">
+      <p class="font-mono text-xs uppercase tracking-[0.18em] text-paper-soft">
+        Öppet
+      </p>
+      <div class="mt-4 space-y-1 text-sm font-mono">
+        {
+          site.hours.map((h) => (
+            <div class="flex justify-between gap-2">
+              <span class="text-paper-dim">{h.day.slice(0, 3)}</span>
+              <span class="text-paper tabular-nums">{h.time}</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-4 font-mono text-xs uppercase tracking-[0.15em] text-paper-soft">
+      <p>
+        © {year} {site.name} / All rights reserved
+      </p>
+      <div class="flex gap-4">
+        <a href={site.social.facebook} target="_blank" rel="noopener" class="hover:text-paper">
+          Facebook
+        </a>
+        <span class="text-paper-soft/40">/</span>
+        <a href={site.social.instagram} target="_blank" rel="noopener" class="hover:text-paper">
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

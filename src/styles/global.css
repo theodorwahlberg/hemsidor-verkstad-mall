@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  /* Editorial industriell — defaultar till mörk (verkstadssvart) */
+  --font-sans: "Manrope", "system-ui", "sans-serif";
+  --font-display: "Bebas Neue", "Impact", "sans-serif";
+  --font-mono: "JetBrains Mono", "Menlo", monospace;
+
+  /* DARK MODE (default) — mörk bakgrund + manualpapper-text */
+  --color-shop: #0a0e14;
+  --color-shop-deep: #050709;
+  --color-shop-soft: #131820;
+  --color-shop-line: #1f2933;
+
+  --color-paper: #ece8df;
+  --color-paper-dim: #aaa5a0;
+  --color-paper-soft: #7b766f;
+
+  /* Varning-orange — samma i båda lägen */
+  --color-warn: #ff6b00;
+  --color-warn-deep: #cc5500;
+
+  /* Marin sekundär */
+  --color-marin: #122444;
+  --color-marin-soft: #1e3a5f;
+}
+
+/* LIGHT MODE — manualpapper-bakgrund + mörk text */
+:root[data-theme="light"] {
+  --color-shop: #ebe7dc;
+  --color-shop-deep: #ddd9ce;
+  --color-shop-soft: #f5f1e6;
+  --color-shop-line: #c8c1b5;
+
+  --color-paper: #0a0e14;
+  --color-paper-dim: #3a4351;
+  --color-paper-soft: #5f6b75;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-shop);
+  color: var(--color-paper);
+  font-family: var(--font-sans);
+}
+
+body {
+  background: var(--color-shop);
+}
+
+::selection {
+  background: var(--color-warn);
+  color: var(--color-shop);
+}
+
+/* Räknar-upp animation för stat-numbers */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.count-up { animation: count-up 0.8s ease-out forwards; }
+
+/* Sätt theme baserat på system om ingen explicit preference */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) {
+    --color-shop: #ebe7dc;
+    --color-shop-deep: #ddd9ce;
+    --color-shop-soft: #f5f1e6;
+    --color-shop-line: #c8c1b5;
+    --color-paper: #0a0e14;
+    --color-paper-dim: #3a4351;
+    --color-paper-soft: #5f6b75;
+  }
+}

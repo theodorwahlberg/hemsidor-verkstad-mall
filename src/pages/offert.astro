@@ -1,0 +1,183 @@
+---
+import Base from "../layouts/Base.astro";
+import { site, services } from "../site.config";
+
+const serviceOptions = services.map((s) => {
+  const label = `${s.name} (${s.price})`;
+  return { label, value: label };
+});
+
+const today = new Date().toISOString().split("T")[0];
+---
+
+<Base title={`Begär offert – ${site.name}`}>
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+        / Begär offert
+      </p>
+      <h1 class="font-display text-7xl md:text-[9rem] uppercase text-paper mt-3 leading-[0.85] tracking-tight">
+        Skicka oss<br />
+        <span class="text-warn">förfrågan.</span>
+      </h1>
+      <p class="text-paper-dim mt-8 max-w-xl leading-relaxed">
+        Fyll i formuläret nedan så återkopplar vi inom 24 timmar med pris och
+        föreslagen tid. Vill du prata direkt, ring {site.phone}.
+      </p>
+    </div>
+  </section>
+
+  <section class="border-b border-shop-line bg-shop-soft">
+    <div class="max-w-3xl mx-auto px-6 py-20 md:py-28">
+      {/* TODO: byt action till kundens egen Formspree-endpoint innan deploy */}
+      <form
+        action="https://formspree.io/f/mykodwke"
+        method="POST"
+        class="space-y-8"
+      >
+        <!-- Tjänst -->
+        <div>
+          <label
+            for="service"
+            class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+          >
+            / 01 / Vad gäller det?
+          </label>
+          <select
+            id="service"
+            name="service"
+            required
+            class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors"
+          >
+            <option value="">Välj tjänst</option>
+            {
+              serviceOptions.map((opt) => (
+                <option value={opt.value}>{opt.label}</option>
+              ))
+            }
+            <option value="annat">Annat (beskriv i meddelandet)</option>
+          </select>
+        </div>
+
+        <!-- Bil -->
+        <div>
+          <label
+            for="car"
+            class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+          >
+            / 02 / Bilmodell och årsmodell
+          </label>
+          <input
+            type="text"
+            id="car"
+            name="car"
+            placeholder="t.ex. Volvo V70 2018"
+            required
+            class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors placeholder:text-paper-soft"
+          />
+        </div>
+
+        <!-- Datum -->
+        <div>
+          <label
+            for="date"
+            class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+          >
+            / 03 / Önskat datum (valfritt)
+          </label>
+          <input
+            type="date"
+            id="date"
+            name="date"
+            min={today}
+            class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors"
+          />
+        </div>
+
+        <!-- Namn -->
+        <div>
+          <label
+            for="name"
+            class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+          >
+            / 04 / Ditt namn
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            autocomplete="name"
+            class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors"
+          />
+        </div>
+
+        <!-- Telefon + Email -->
+        <div class="grid sm:grid-cols-2 gap-6">
+          <div>
+            <label
+              for="phone"
+              class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+            >
+              / 05 / Telefon
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              required
+              autocomplete="tel"
+              class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors"
+            />
+          </div>
+          <div>
+            <label
+              for="email"
+              class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+            >
+              / 06 / E-post
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              autocomplete="email"
+              class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors"
+            />
+          </div>
+        </div>
+
+        <!-- Meddelande -->
+        <div>
+          <label
+            for="message"
+            class="block font-mono text-xs uppercase tracking-[0.2em] text-paper-soft mb-3"
+          >
+            / 07 / Beskriv felet eller önskemålet
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            placeholder="t.ex. Servicelampan lyser, AC blåser inte kallt, vill ha vinterdäcken på"
+            class="w-full bg-shop border border-shop-line text-paper px-4 py-4 font-sans focus:outline-none focus:border-warn transition-colors resize-none placeholder:text-paper-soft"
+          ></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="w-full bg-warn text-shop px-8 py-5 font-mono text-sm uppercase tracking-[0.2em] font-semibold hover:bg-warn-deep transition-colors flex items-center justify-between"
+        >
+          Skicka förfrågan
+          <span>▸</span>
+        </button>
+
+        <p class="text-center font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+          / Vi återkopplar inom 24 timmar
+        </p>
+      </form>
+    </div>
+  </section>
+</Base>

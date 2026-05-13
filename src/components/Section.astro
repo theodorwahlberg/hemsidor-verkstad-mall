@@ -1,0 +1,27 @@
+---
+interface Props {
+  id?: string;
+  bg?: "shop" | "soft" | "marin" | "warn";
+  pad?: "default" | "tight" | "loose";
+  border?: boolean;
+}
+const { id, bg = "shop", pad = "default", border = false } = Astro.props;
+const bgClass = {
+  shop: "bg-shop",
+  soft: "bg-shop-soft",
+  marin: "bg-marin text-paper",
+  warn: "bg-warn text-shop",
+}[bg];
+const padClass = {
+  default: "py-20 md:py-28",
+  tight: "py-12 md:py-16",
+  loose: "py-28 md:py-40",
+}[pad];
+const borderClass = border ? "border-t border-shop-line" : "";
+---
+
+<section id={id} class:list={[padClass, bgClass, borderClass]}>
+  <div class="max-w-7xl mx-auto px-6">
+    <slot />
+  </div>
+</section>

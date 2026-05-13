@@ -1,0 +1,118 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../site.config";
+---
+
+<Base title={`Kontakt – ${site.name}`}>
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-16 md:py-24">
+      <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+        / Kontakt
+      </p>
+      <h1 class="font-display text-7xl md:text-[10rem] uppercase text-paper mt-3 leading-[0.85] tracking-tight">
+        Hör av <span class="text-warn">er.</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-20 md:py-24 grid md:grid-cols-12 gap-12">
+      <!-- Kontaktblock -->
+      <div class="md:col-span-7 space-y-12">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+            / Telefon
+          </p>
+          <a
+            href={`tel:${site.phone.replace(/\s/g, "")}`}
+            class="font-display text-5xl md:text-7xl uppercase text-paper hover:text-warn tracking-tight transition-colors block mt-3"
+          >
+            {site.phone}
+          </a>
+          <p class="text-sm text-paper-dim mt-3 leading-relaxed">
+            Vi svarar oftast på första signalen under öppettider.
+          </p>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+            / E-post
+          </p>
+          <a
+            href={`mailto:${site.email}`}
+            class="font-display text-3xl md:text-5xl uppercase text-paper hover:text-warn tracking-tight transition-colors block mt-3 break-all"
+          >
+            {site.email}
+          </a>
+        </div>
+
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+            / Adress
+          </p>
+          <p class="font-display text-3xl md:text-5xl uppercase text-paper tracking-tight mt-3 leading-tight">
+            {site.address.street}<br />
+            {site.address.postal}
+          </p>
+          <a
+            href={site.address.mapsUrl}
+            target="_blank"
+            rel="noopener"
+            class="inline-block mt-4 font-mono text-xs uppercase tracking-[0.2em] text-warn hover:underline underline-offset-4"
+          >
+            Öppna i Google Maps ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Sidopanel -->
+      <div class="md:col-span-5 space-y-6">
+        <!-- Öppettider -->
+        <div class="border border-shop-line p-8 bg-shop-soft">
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-warn">
+            / Öppettider
+          </p>
+          <div class="mt-6 space-y-2 font-mono text-sm">
+            {
+              site.hours.map((h) => (
+                <div class="flex justify-between items-baseline border-b border-shop-line pb-2">
+                  <span class="text-paper-dim uppercase tracking-wider text-xs">
+                    {h.day}
+                  </span>
+                  <span class="text-paper tabular-nums">{h.time}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Offert-CTA -->
+        <a
+          href="/offert"
+          class="block border-2 border-warn bg-warn text-shop p-8 hover:bg-warn-deep hover:border-warn-deep transition-colors group"
+        >
+          <p class="font-mono text-xs uppercase tracking-[0.2em] opacity-70">
+            / Snabbast
+          </p>
+          <p class="font-display text-4xl uppercase mt-3 tracking-tight">
+            Begär offert ▸
+          </p>
+          <p class="text-sm mt-3 opacity-80">
+            Skicka förfrågan direkt här. Vi återkopplar inom 24 timmar.
+          </p>
+        </a>
+
+        <!-- Social -->
+        <div class="flex gap-4 font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+          <a href={site.social.facebook} target="_blank" rel="noopener" class="hover:text-warn">
+            Facebook ↗
+          </a>
+          <span class="text-paper-soft/40">/</span>
+          <a href={site.social.instagram} target="_blank" rel="noopener" class="hover:text-warn">
+            Instagram ↗
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,105 @@
+---
+import { site } from "../site.config";
+const links = [
+  { href: "/tjanster", label: "Tjänster" },
+  { href: "/arbete", label: "Vårt arbete" },
+  { href: "/om", label: "Om oss" },
+  { href: "/kontakt", label: "Kontakt" },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="border-b border-shop-line bg-shop/95 backdrop-blur sticky top-0 z-40">
+  <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-6">
+    <a
+      href="/"
+      class="font-mono text-xs uppercase tracking-[0.18em] text-paper hover:text-warn transition-colors whitespace-nowrap"
+    >
+      <span class="text-paper-dim mr-2">●</span>
+      {site.name}
+    </a>
+    <nav class="hidden md:flex items-center gap-1 font-mono text-xs uppercase tracking-[0.15em]">
+      {
+        links.map(({ href, label }, i) => (
+          <>
+            {i > 0 && <span class="text-paper-soft">/</span>}
+            <a
+              href={href}
+              class:list={[
+                "px-3 py-1.5 transition-colors",
+                path === href
+                  ? "text-warn"
+                  : "text-paper-dim hover:text-paper",
+              ]}
+            >
+              {label}
+            </a>
+          </>
+        ))
+      }
+    </nav>
+    <div class="flex items-center gap-3">
+      <!-- Theme toggle -->
+      <button
+        type="button"
+        id="theme-toggle"
+        aria-label="Växla mellan ljust och mörkt läge"
+        class="font-mono text-xs uppercase tracking-[0.18em] text-paper-dim hover:text-paper transition-colors border border-shop-line px-3 py-3 hidden sm:inline-flex items-center gap-2"
+      >
+        <span data-theme-label-dark>Mörk</span>
+        <span data-theme-label-light class="hidden">Ljus</span>
+      </button>
+      <a
+        href="/offert"
+        class="font-mono text-xs uppercase tracking-[0.15em] bg-warn text-shop px-5 py-3 hover:bg-warn-deep transition-colors font-semibold whitespace-nowrap"
+      >
+        Begär offert <span class="ml-1">▸</span>
+      </a>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const root = document.documentElement;
+    const btn = document.getElementById("theme-toggle");
+    if (!btn) return;
+
+    const darkLabel = btn.querySelector("[data-theme-label-dark]");
+    const lightLabel = btn.querySelector("[data-theme-label-light]");
+
+    function getCurrentTheme() {
+      const attr = root.getAttribute("data-theme");
+      if (attr === "light" || attr === "dark") return attr;
+      // Inget explicit val — kolla system
+      return window.matchMedia("(prefers-color-scheme: light)").matches
+        ? "light"
+        : "dark";
+    }
+
+    function syncLabel() {
+      const theme = getCurrentTheme();
+      if (theme === "light") {
+        darkLabel.classList.add("hidden");
+        lightLabel.classList.remove("hidden");
+      } else {
+        darkLabel.classList.remove("hidden");
+        lightLabel.classList.add("hidden");
+      }
+    }
+
+    syncLabel();
+
+    btn.addEventListener("click", () => {
+      const current = getCurrentTheme();
+      const next = current === "light" ? "dark" : "light";
+      root.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {
+        /* localStorage blockerat */
+      }
+      syncLabel();
+    });
+  })();
+</script>
