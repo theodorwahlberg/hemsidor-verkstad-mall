@@ -1,0 +1,249 @@
+---
+// Tillfällig preview-page — visar alla 5 Lottie-animationer side-by-side.
+// Tas bort när val gjorts.
+
+const animations = [
+  {
+    no: "01",
+    name: "Wheel",
+    creator: "Rafa Marques",
+    url: "https://assets-v2.lottiefiles.com/a/296bc58e-116b-11ee-b93e-73a6db565534/3zNoMbUYrP.lottie",
+    pageUrl: "https://lottiefiles.com/free-animation/wheel-Xf0ZLiaUmC",
+    note: "Hjul-fokuserad — bra för däckbyte/däckhotell-sektion",
+  },
+  {
+    no: "02",
+    name: "Tire repair icon",
+    creator: "nm",
+    url: "https://assets-v2.lottiefiles.com/a/6d4aba9c-118b-11ee-89ea-438b8fa825c7/eeW6nLHF3O.lottie",
+    pageUrl: "https://lottiefiles.com/free-animation/tire-repair-icon-animation-o84KpnjmfC",
+    note: "Mekaniker-ikon — bra för 'service/reparation'-sektion",
+  },
+  {
+    no: "03",
+    name: "Sedan",
+    creator: "Varun Talati",
+    url: "https://assets-v2.lottiefiles.com/a/2bc0eb9e-116a-11ee-91a8-a7bbd390e829/ZQbapIUDLZ.lottie",
+    pageUrl: "https://lottiefiles.com/free-animation/sedan-06tCG0KIRD",
+    note: "Klassisk sedan — bra för hero",
+  },
+  {
+    no: "04",
+    name: "Car",
+    creator: "Jack Nicholson",
+    url: "https://assets-v2.lottiefiles.com/a/b5c02198-bdb7-4a33-ae57-6c88eca3f97c/2cFriLZ3MB.lottie",
+    pageUrl: "https://lottiefiles.com/free-animation/car-2cFriLZ3MB",
+    note: "Generisk bil — alternativ för hero",
+  },
+  {
+    no: "05",
+    name: "E28 (BMW classic)",
+    creator: "Klims Simanovičs",
+    url: "https://assets-v2.lottiefiles.com/a/b8b47642-c933-4211-aff2-13b4366b1837/RVd9G5ePZL.lottie",
+    pageUrl: "https://lottiefiles.com/free-animation/e28sideai-RVd9G5ePZL",
+    note: "Klassisk BMW E28 från sidan — mer karaktärsfull",
+  },
+];
+---
+
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lottie Preview – Verkstad-mall</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"
+      type="module"></script>
+    <style>
+      :root {
+        --shop: #0a0e14;
+        --shop-soft: #131820;
+        --shop-line: #1f2933;
+        --paper: #ece8df;
+        --paper-dim: #aaa5a0;
+        --paper-soft: #7b766f;
+        --warn: #ff6b00;
+      }
+      body {
+        margin: 0;
+        background: var(--shop);
+        color: var(--paper);
+        font-family: "Manrope", system-ui, sans-serif;
+        min-height: 100vh;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+      }
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: clamp(3rem, 10vw, 7rem);
+        line-height: 0.85;
+        letter-spacing: -0.02em;
+        margin: 0 0 1rem;
+      }
+      .accent {
+        color: var(--warn);
+      }
+      .meta {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        color: var(--paper-dim);
+      }
+      .intro {
+        max-width: 36rem;
+        color: var(--paper-dim);
+        margin: 1rem 0 4rem;
+        line-height: 1.6;
+      }
+      .grid {
+        display: grid;
+        gap: 1px;
+        background: var(--shop-line);
+        border: 1px solid var(--shop-line);
+      }
+      @media (min-width: 768px) {
+        .grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      .card {
+        background: var(--shop);
+        padding: 2rem;
+      }
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.18em;
+      }
+      .card-no {
+        color: var(--paper-soft);
+      }
+      .card-creator {
+        color: var(--warn);
+      }
+      .card h2 {
+        font-family: "Bebas Neue", sans-serif;
+        font-size: 2.5rem;
+        letter-spacing: -0.01em;
+        margin: 0 0 1rem;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .card p {
+        color: var(--paper-dim);
+        font-size: 0.875rem;
+        line-height: 1.5;
+        margin: 0 0 1.5rem;
+      }
+      .player-frame {
+        background: var(--shop-soft);
+        border: 1px solid var(--shop-line);
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      dotlottie-wc {
+        width: 100%;
+        max-width: 320px;
+        height: 240px;
+      }
+      .card-footer {
+        margin-top: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        color: var(--paper-soft);
+      }
+      .card-footer a {
+        color: var(--warn);
+        text-decoration: none;
+      }
+      .card-footer a:hover {
+        text-decoration: underline;
+      }
+      .footer-info {
+        margin-top: 4rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--shop-line);
+        color: var(--paper-dim);
+        font-size: 0.875rem;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <p class="meta">/ Preview / 5 alternativ</p>
+      <h1>
+        Välj en <span class="accent">Lottie</span>.
+      </h1>
+      <p class="intro">
+        Alla fem animationer från LottieFiles, sida vid sida. Klicka på en
+        kandidat-länk för att se den i större format på LottieFiles, eller säg
+        bara numret (01–05) så implementerar jag den i hero-sektionen och
+        deployar.
+      </p>
+
+      <div class="grid">
+        {
+          animations.map((a) => (
+            <article class="card">
+              <header class="card-header">
+                <span class="card-no">/ {a.no}</span>
+                <span class="card-creator">av {a.creator}</span>
+              </header>
+              <h2>{a.name}</h2>
+              <p>{a.note}</p>
+              <div class="player-frame">
+                <dotlottie-wc
+                  src={a.url}
+                  autoplay
+                  loop
+                  speed="1"
+                />
+              </div>
+              <div class="card-footer">
+                <span>/ {a.no}.lottie</span>
+                <a href={a.pageUrl} target="_blank" rel="noopener">
+                  Se på LottieFiles ↗
+                </a>
+              </div>
+            </article>
+          ))
+        }
+      </div>
+
+      <div class="footer-info">
+        <p>
+          <strong>Hur välja:</strong> säg numret (t.ex. "kör 03") så lägger
+          jag in den i verkstad-mallens hero, ersätter min nuvarande SVG-bil,
+          och deployar. Animationen kommer ladda från LottieFiles CDN
+          (~30–80 KB per animation) eller jag kan hosta lokalt för bästa
+          prestanda.
+        </p>
+        <p style="margin-top: 1rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--paper-soft);">
+          / Denna preview-page tas bort efter val gjorts.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
