@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Section from "../components/Section.astro";
 import Decor from "../components/Decor.astro";
-import { site, services, stats, reviews } from "../site.config";
+import { site, services, stats, reviews, lottieAnimations } from "../site.config";
 
 const featured = services.slice(0, 6);
 const todayName = new Date().toLocaleDateString("sv-SE", { weekday: "long" });
@@ -89,18 +89,40 @@ const jsonLd = {
         </div>
       </div>
 
-      <!-- Bil rullar in från höger på page load + parallax på scroll -->
-      <div
-        class="mt-16 md:mt-20 text-paper car-parallax max-w-3xl mx-auto"
-        data-parallax-speed="0.3"
-      >
-        <div class="car-roll-in car-scroll" data-car>
-          <Decor variant="car-detailed" />
+      <!-- Hero-animation: Sedan från LottieFiles (av Varun Talati) -->
+      <div class="mt-12 md:mt-16 max-w-3xl mx-auto car-parallax" data-parallax-speed="0.3">
+        <div class="aspect-[16/9] flex items-center justify-center">
+          <dotlottie-wc
+            src={lottieAnimations.sedan}
+            autoplay
+            loop
+            speed="1"
+            style="width: 100%; height: 100%;"
+          ></dotlottie-wc>
         </div>
         <div class="mt-2 flex items-center justify-between font-mono text-[10px] uppercase tracking-[0.25em] text-paper-soft">
           <span>/ Modell: Sedan</span>
           <span>/ Status: I service</span>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHEEL-DIVIDER ============ -->
+  <section class="border-b border-shop-line">
+    <div class="max-w-7xl mx-auto px-6 py-8 md:py-12">
+      <div class="grid grid-cols-3 items-center gap-4 font-mono text-xs uppercase tracking-[0.2em] text-paper-soft">
+        <p class="text-left">/ I drift</p>
+        <div class="flex items-center justify-center">
+          <dotlottie-wc
+            src={lottieAnimations.wheel}
+            autoplay
+            loop
+            speed="0.8"
+            style="width: 96px; height: 96px;"
+          ></dotlottie-wc>
+        </div>
+        <p class="text-right">Hjul i rotation /</p>
       </div>
     </div>
   </section>
@@ -184,13 +206,24 @@ const jsonLd = {
   <!-- ============ REVIEWS ============ -->
   <section class="border-b border-shop-line bg-shop-soft">
     <div class="max-w-7xl mx-auto px-6 py-20 md:py-28">
-      <div class="border-b border-shop-line pb-8 mb-12 reveal" data-reveal>
-        <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
-          / Sektion 02
-        </p>
-        <h2 class="font-display text-6xl md:text-7xl uppercase text-paper mt-3 leading-none tracking-tight">
-          Vad kunderna säger
-        </h2>
+      <div class="border-b border-shop-line pb-8 mb-12 reveal flex items-end justify-between gap-6 flex-wrap" data-reveal>
+        <div>
+          <p class="font-mono text-xs uppercase tracking-[0.2em] text-paper-dim">
+            / Sektion 02
+          </p>
+          <h2 class="font-display text-6xl md:text-7xl uppercase text-paper mt-3 leading-none tracking-tight">
+            Vad kunderna säger
+          </h2>
+        </div>
+        <div class="opacity-90">
+          <dotlottie-wc
+            src={lottieAnimations.tireRepair}
+            autoplay
+            loop
+            speed="1"
+            style="width: 120px; height: 120px;"
+          ></dotlottie-wc>
+        </div>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 reveal-stagger" data-reveal>
@@ -235,6 +268,15 @@ const jsonLd = {
             Behöver<br />
             bilen <span class="text-warn">hjälp?</span>
           </h2>
+          <div class="mt-8 max-w-md">
+            <dotlottie-wc
+              src={lottieAnimations.car}
+              autoplay
+              loop
+              speed="1"
+              style="width: 100%; height: 180px;"
+            ></dotlottie-wc>
+          </div>
         </div>
         <div class="md:col-span-5">
           <p class="text-paper-dim leading-relaxed">

@@ -52,6 +52,11 @@ const ogImageAbs = Astro.site
       href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    {/* Lottie web-component för animerade illustrationer */}
+    <script
+      src="https://unpkg.com/@lottiefiles/dotlottie-wc@latest/dist/dotlottie-wc.js"
+      type="module"></script>
     <title>{title}</title>
 
     {/* Theme + JS-flag init — körs INNAN render för att undvika FOUC/FOWT */}

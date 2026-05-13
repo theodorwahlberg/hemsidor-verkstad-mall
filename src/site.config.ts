@@ -65,6 +65,14 @@ export const services: Service[] = [
   { no: "09", name: "Bromsservice", short: "Byte av belägg och skivor fram eller bak.", duration: "2 tim", price: "fr. 1 800 kr", icon: "brake" },
 ];
 
+export const lottieAnimations = {
+  wheel: "https://assets-v2.lottiefiles.com/a/296bc58e-116b-11ee-b93e-73a6db565534/3zNoMbUYrP.lottie",
+  tireRepair: "https://assets-v2.lottiefiles.com/a/6d4aba9c-118b-11ee-89ea-438b8fa825c7/eeW6nLHF3O.lottie",
+  sedan: "https://assets-v2.lottiefiles.com/a/2bc0eb9e-116a-11ee-91a8-a7bbd390e829/ZQbapIUDLZ.lottie",
+  car: "https://assets-v2.lottiefiles.com/a/b5c02198-bdb7-4a33-ae57-6c88eca3f97c/2cFriLZ3MB.lottie",
+  e28: "https://assets-v2.lottiefiles.com/a/b8b47642-c933-4211-aff2-13b4366b1837/RVd9G5ePZL.lottie",
+};
+
 export const stats = [
   { value: "14", suffix: "+", label: "År i området" },
   { value: "3", suffix: "", label: "Mekaniker på plats" },
