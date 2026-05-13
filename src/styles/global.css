@@ -44,6 +44,21 @@ html {
   font-family: var(--font-sans);
 }
 
+/* Lottie-animationer inverteras till vit i mörkt läge (default).
+   I ljust läge visas originalfärgerna. */
+dotlottie-wc {
+  filter: invert(1) hue-rotate(180deg);
+  transition: filter 0.3s ease;
+}
+:root[data-theme="light"] dotlottie-wc {
+  filter: none;
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme]) dotlottie-wc {
+    filter: none;
+  }
+}
+
 body {
   background: var(--color-shop);
 }
