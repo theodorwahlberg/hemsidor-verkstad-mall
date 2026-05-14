@@ -1,0 +1,425 @@
+---
+// Standalone preview för hantverk-mall mood-paletter.
+// Theo browsar URL, väljer A/B/C, jag bygger sedan mallen.
+const palettes = [
+  {
+    id: "A",
+    name: "Verkstadsträ",
+    desc: "Varma trätoner. Signal: kvalitet och tradition.",
+    bg: "#f4ede0",
+    text: "#2d1f12",
+    secondary: "#8b6f47",
+    accent: "#d68a2e",
+    swatches: [
+      { hex: "#f4ede0", name: "Cream (bg)" },
+      { hex: "#2d1f12", name: "Chocolate (text)" },
+      { hex: "#8b6f47", name: "Oak (borders)" },
+      { hex: "#d68a2e", name: "Amber (CTA)" },
+    ],
+    fontDisplay: "'Fraunces', 'Georgia', serif",
+    fontBody: "'Inter', system-ui, sans-serif",
+    fontMono: "'JetBrains Mono', monospace",
+    fontLabel: "Fraunces + Inter + JetBrains Mono",
+    feel: "Svenskt byggmagasin 80-tal möter Kinfolk",
+  },
+  {
+    id: "B",
+    name: "Modern hantverk",
+    desc: "Kontrasterar mörk skog med rust. Klassisk svensk minimalism.",
+    bg: "#f8f5f0",
+    text: "#1f2e22",
+    secondary: "#5a5046",
+    accent: "#c75a2a",
+    swatches: [
+      { hex: "#f8f5f0", name: "Bone (bg)" },
+      { hex: "#1f2e22", name: "Deep forest (headers)" },
+      { hex: "#5a5046", name: "Warm gray (body)" },
+      { hex: "#c75a2a", name: "Rust orange (CTA)" },
+    ],
+    fontDisplay: "'Cormorant Garamond', Georgia, serif",
+    fontBody: "'Manrope', system-ui, sans-serif",
+    fontMono: "'JetBrains Mono', monospace",
+    fontLabel: "Cormorant Garamond + Manrope + JetBrains Mono",
+    feel: "Tidlöst, refined, hantverksstolt",
+  },
+  {
+    id: "C",
+    name: "Bauhaus hantverk",
+    desc: "Geometriskt, robust, principiellt. Maximal distinktion.",
+    bg: "#ebe8dd",
+    text: "#1a1a1a",
+    secondary: "#5a5046",
+    accent: "#b8473a",
+    accent2: "#c69b3a",
+    swatches: [
+      { hex: "#ebe8dd", name: "Linen (bg)" },
+      { hex: "#1a1a1a", name: "Charcoal (text)" },
+      { hex: "#b8473a", name: "Red brick (CTA)" },
+      { hex: "#c69b3a", name: "Mustard (secondary)" },
+    ],
+    fontDisplay: "'Anton', 'Impact', sans-serif",
+    fontBody: "'Inter', system-ui, sans-serif",
+    fontMono: "'JetBrains Mono', monospace",
+    fontLabel: "Anton + Inter + JetBrains Mono",
+    feel: "Industriell Bauhaus, kraft + precision",
+  },
+];
+---
+
+<!doctype html>
+<html lang="sv">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hantverk-mall — Mood-paletter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Cormorant+Garamond:wght@400;500;600;700&family=Fraunces:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --neutral-bg: #f5f5f5;
+        --neutral-text: #1a1a1a;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Inter", system-ui, sans-serif;
+        background: var(--neutral-bg);
+        color: var(--neutral-text);
+      }
+      .page-header {
+        padding: 4rem 2rem 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      .page-header h1 {
+        font-size: 3rem;
+        margin: 0 0 1rem;
+        font-weight: 700;
+      }
+      .page-header p {
+        color: #555;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .palette-card {
+        max-width: 1400px;
+        margin: 3rem auto;
+        padding: 0;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+      }
+      .palette-meta {
+        padding: 2.5rem 3rem 1.5rem;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 2rem;
+        align-items: end;
+      }
+      .palette-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        opacity: 0.6;
+      }
+      .palette-id {
+        font-size: 5rem;
+        line-height: 1;
+        font-weight: 800;
+        margin: 0;
+      }
+      .palette-info h2 {
+        font-size: 2rem;
+        margin: 0;
+        font-weight: 600;
+      }
+      .palette-info p {
+        margin: 0.5rem 0 0;
+        opacity: 0.75;
+      }
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        margin: 0;
+      }
+      .swatch {
+        padding: 2rem 1.5rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .swatch-name {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+      }
+      .swatch-hex {
+        opacity: 0.7;
+        text-transform: uppercase;
+      }
+      .mock-hero {
+        padding: 4rem 3rem;
+        min-height: 320px;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .mock-eyebrow {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.25em;
+        opacity: 0.6;
+        margin-bottom: 1rem;
+      }
+      .mock-headline {
+        font-size: clamp(2.5rem, 4vw, 4rem);
+        line-height: 1.05;
+        font-weight: 700;
+        margin: 0 0 1.5rem;
+      }
+      .mock-body {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        max-width: 480px;
+        margin: 0 0 2rem;
+        opacity: 0.85;
+      }
+      .mock-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.9rem 1.75rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+      }
+      .mock-card {
+        padding: 2rem;
+        border-radius: 12px;
+        border: 2px solid;
+      }
+      .mock-card-tag {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        opacity: 0.6;
+      }
+      .mock-card-title {
+        font-size: 1.5rem;
+        margin: 0.5rem 0;
+        font-weight: 600;
+      }
+      .mock-card-price {
+        font-family: "JetBrains Mono", monospace;
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid currentColor;
+        opacity: 0.5;
+      }
+      .mock-card-price strong {
+        opacity: 1;
+        font-size: 1.25rem;
+      }
+      .mock-stat-band {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.5rem;
+        padding: 2.5rem 3rem;
+      }
+      .mock-stat-value {
+        font-size: 3rem;
+        line-height: 1;
+        font-weight: 800;
+        margin: 0;
+      }
+      .mock-stat-label {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        margin-top: 0.5rem;
+        opacity: 0.65;
+      }
+      .font-info {
+        padding: 1.5rem 3rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        background: rgba(0, 0, 0, 0.02);
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.85rem;
+        letter-spacing: 0.05em;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .vote-row {
+        text-align: center;
+        margin: 4rem auto 6rem;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+        letter-spacing: 0.1em;
+        opacity: 0.6;
+      }
+      @media (max-width: 720px) {
+        .swatches {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .mock-hero {
+          grid-template-columns: 1fr;
+        }
+        .mock-stat-band {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="page-header">
+      <h1>Hantverk-mall — välj mood-palett</h1>
+      <p>
+        Tre kompletta paket: färger, fonter, knapp-stil och kort-design. Skicka
+        ett meddelande med <code>A</code>, <code>B</code> eller <code>C</code>
+        så bygger jag hela mallen i den stilen.
+      </p>
+    </header>
+
+    {
+      palettes.map((p) => (
+        <article
+          class="palette-card"
+          style={`background: ${p.bg}; color: ${p.text};`}
+        >
+          {/* Meta-row */}
+          <div class="palette-meta">
+            <div>
+              <p class="palette-tag" style={`color: ${p.secondary};`}>
+                / Mood-paket
+              </p>
+              <p class="palette-id" style={`font-family: ${p.fontDisplay};`}>
+                {p.id}
+              </p>
+            </div>
+            <div class="palette-info" style={`font-family: ${p.fontBody};`}>
+              <h2 style={`font-family: ${p.fontDisplay};`}>{p.name}</h2>
+              <p>{p.desc}</p>
+            </div>
+          </div>
+
+          {/* Swatches */}
+          <div class="swatches">
+            {p.swatches.map((s) => {
+              const luminance =
+                parseInt(s.hex.slice(1, 3), 16) +
+                parseInt(s.hex.slice(3, 5), 16) +
+                parseInt(s.hex.slice(5, 7), 16);
+              const textColor = luminance > 380 ? "#1a1a1a" : "#ffffff";
+              return (
+                <div class="swatch" style={`background: ${s.hex}; color: ${textColor};`}>
+                  <span class="swatch-name">{s.name}</span>
+                  <span class="swatch-hex">{s.hex}</span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Mock hero */}
+          <div class="mock-hero">
+            <div>
+              <p class="mock-eyebrow" style={`font-family: ${p.fontMono};`}>
+                / Sollentuna, sedan 2008
+              </p>
+              <h3 class="mock-headline" style={`font-family: ${p.fontDisplay};`}>
+                Hantverk som håller.
+              </h3>
+              <p class="mock-body" style={`font-family: ${p.fontBody};`}>
+                Lindberg Snickeri bygger kök, badrum och inredning för kunder
+                som vill att hantverk syns. Tre snickare, 18 år, en stolthet.
+              </p>
+              <a
+                class="mock-btn"
+                href="#"
+                style={`background: ${p.accent}; color: ${p.bg};`}
+              >
+                Begär offert <span>▸</span>
+              </a>
+            </div>
+
+            <div
+              class="mock-card"
+              style={`border-color: ${p.secondary}40; background: ${p.bg};`}
+            >
+              <p class="mock-card-tag" style={`font-family: ${p.fontMono}; color: ${p.accent};`}>
+                / 01 Kök
+              </p>
+              <p class="mock-card-title" style={`font-family: ${p.fontDisplay};`}>
+                Köksrenovering
+              </p>
+              <p style={`font-family: ${p.fontBody}; opacity: 0.75; margin: 0;`}>
+                Skåp, stommar, bänkskivor i sten eller massivt trä.
+              </p>
+              <p class="mock-card-price" style={`color: ${p.text}; border-color: ${p.secondary}40;`}>
+                <strong style={`color: ${p.accent}; font-family: ${p.fontDisplay};`}>
+                  Fr. 85 000 kr
+                </strong>
+              </p>
+            </div>
+          </div>
+
+          {/* Stat-band */}
+          <div
+            class="mock-stat-band"
+            style={`background: ${p.text}; color: ${p.bg};`}
+          >
+            {[
+              { v: "18+", l: "År som snickeri" },
+              { v: "3", l: "Hantverkare" },
+              { v: "150+", l: "Kök & badrum" },
+              { v: "12 mån", l: "Garanti" },
+            ].map((s) => (
+              <div>
+                <p class="mock-stat-value" style={`font-family: ${p.fontDisplay};`}>
+                  <span>{s.v.slice(0, -1)}</span>
+                  <span style={`color: ${p.accent};`}>{s.v.slice(-1)}</span>
+                </p>
+                <p class="mock-stat-label">{s.l}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Font info */}
+          <div class="font-info">
+            <span>
+              <strong style={`font-family: ${p.fontDisplay}; font-size: 1.2rem;`}>
+                Aa
+              </strong>
+              &nbsp;{p.fontLabel}
+            </span>
+            <span style="opacity: 0.6;">{p.feel}</span>
+          </div>
+        </article>
+      ))
+    }
+
+    <p class="vote-row">/ Skicka A, B eller C för att låsa val</p>
+  </body>
+</html>
